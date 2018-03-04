@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="shortcut icon" href="./MVK Clocks.ico">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="apple-touch-icon" href="./iOS-icon.png" />
+<link rel="apple-touch-startup-image" href="./iOS-startup.png" />
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<title>Clocks</title>
+<meta http-equiv="refresh" content="600">
+
+<script type="text/javascript">
+function updateClock (){
+  var currentTime = new Date ();
+  
+  //Get the day for the updating clock
+  var currentDay = currentTime.getDay ();
+
+  var dayFull;
+  var dayShort;
+
+  if (currentDay == 0){
+    dayFull = "Sunday";
+    dayShort = "Sun";
+  }
+
+  if (currentDay == 1){
+    dayFull = "Monday";
+    dayShort = "Mon";
+  }
+
+  if (currentDay == 2){
+    dayFull = "Tuesday";
+    dayShort = "Tue";
+  }
+
+  if (currentDay == 3){
+    dayFull = "Wednesday";
+    dayShort = "Wed";
+  }
+
+  if (currentDay == 4){
+    dayFull = "Thursday";
+    dayShort = "Thu";
+  }
+
+  if (currentDay == 5){
+    dayFull = "Friday";
+    dayShort = "Fri";
+  }
+
+  if (currentDay == 6){
+    dayFull = "Saturday";
+    dayShort = "Sat";
+  }
+
+
+  //Get the month for the updating clock
+  var currentMonth = currentTime.getMonth ();
+
+  //Adjust for zero month start
+  currentMonth = currentMonth + 1;
+
+  var currentMonthPadded = ( currentMonth < 10 ? "0" : "" ) + currentMonth;
+
+
+  var monthFull;
+  var monthShort;
+
+  if (currentMonth == 1){
+    monthFull = "January";
+    monthShort = "Jan";
+  }
+
+  if (currentMonth == 2){
+    monthFull = "February";
+    monthShort = "Feb";
+  }
+
+  if (currentMonth == 3){
+    monthFull = "March";
+    monthShort = "Mar";
+  }
+
+  if (currentMonth == 4){
+    monthFull = "April";
+    monthShort = "Apr";
+  }
+
+  if (currentMonth == 5){
+    monthFull = "May";
+    monthShort = "May";
+  }
+
+  if (currentMonth == 6){
+    monthFull = "June";
+    monthShort = "Jun";
+  }
+
+  if (currentMonth == 7){
+    monthFull = "July";
+    monthShort = "Jul";
+  }
+
+  if (currentMonth == 8){
+    monthFull = "August";
+    monthShort = "Aug";
+  }
+
+  if (currentMonth == 9){
+    monthFull = "September";
+    monthShort = "Sep";
+  }
+
+  if (currentMonth == 10){
+    monthFull = "October";
+    monthShort = "Oct";
+  }
+
+  if (currentMonth == 11){
+    monthFull = "November";
+    monthShort = "Nov";
+  }
+
+  if (currentMonth == 12){
+    monthFull = "December";
+    monthShort = "Dec";
+  }
+
+
+  //Get the date for the updating clock
+  var currentDate = currentTime.getDate ();
+
+  var currentDatePadded = ( currentDate < 10 ? "0" : "" ) + currentDate;
+
+
+  //Get the year for the updating clock
+  var currentYear = currentTime.getFullYear ();
+
+  var yearFull = currentYear;
+
+  //Get 2-digit year -- this will only work until 2099
+  var yearShort = currentYear - 2000;
+
+  //Padding for 2-digit year -- only needed for dates before 2010
+  yearShort = ( yearShort < 10 ? "0" : "" ) + yearShort;
+
+
+  //Get the hours for updating clock
+  var currentHours = currentTime.getHours ();
+  
+  //Get the minutes for updating clock
+  var currentMinutes = currentTime.getMinutes ();
+  
+  //Get the secconds for updating clock
+  var currentSeconds = currentTime.getSeconds ();
+
+  // Choose either "AM" or "PM" as appropriate
+  var timeOfDay = ( currentHours < 12 ) ? "AM" : "PM";
+
+  // Convert the hours component to 12-hour format if needed
+  var current12Hours = currentHours;
+  current12Hours = ( current12Hours > 12 ) ? current12Hours - 12 : current12Hours;
+
+  // Convert an hours component of "0" to "12"
+  current12Hours = ( current12Hours == 0 ) ? 12 : current12Hours;
+
+
+  // Pad the hours, minutes and seconds with leading zeros, if required
+  currentHours = ( currentHours < 10 ? "0" : "" ) + currentHours;
+  currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+  currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+
+
+  //Get the UTC year for the updating clock
+  var currentUTCYear = currentTime.getUTCFullYear ();
+
+  //Get the number of milliseconds since midnight Jan 1, 1970 UTC
+  var currentUNIXtime = currentTime.getTime ();
+
+  //Calculate DOY
+  var currentUTCDOY = Math.floor((currentUNIXtime - Date.UTC(currentUTCYear,0,0))/(24*60*60*1000));
+
+  if (currentUTCDOY < 100){
+	if (currentUTCDOY < 10){
+		currentUTCDOY = "0" + currentUTCDOY;	
+	}
+	currentUTCDOY = "0" + currentUTCDOY;
+  }
+
+  //Get the UTC hours for updating clock
+  var currentUTCHours = currentTime.getUTCHours ();
+  
+  //Get the UTC minutes for updating clock
+  var currentUTCMinutes = currentTime.getUTCMinutes ();
+  
+  //Get the UTC secconds for updating clock
+  var currentUTCSeconds = currentTime.getUTCSeconds ();
+
+  // Pad the UTC hours, minutes and seconds with leading zeros, if required
+  currentUTCHours = ( currentUTCHours < 10 ? "0" : "" ) + currentUTCHours;
+  currentUTCMinutes = ( currentUTCMinutes < 10 ? "0" : "" ) + currentUTCMinutes;
+  currentUTCSeconds = ( currentUTCSeconds < 10 ? "0" : "" ) + currentUTCSeconds;
+
+
+  //Get the ISO week number (http://www.jslab.dk/library/Date.getISOWeek)
+
+    var y = currentTime.getUTCFullYear();
+    var m = currentTime.getUTCMonth() + 1;
+    var d = currentTime.getUTCDate();
+    // If month jan. or feb.
+    if (m < 3) {
+      var a = y - 1;
+      var b = (a / 4 | 0) - (a / 100 | 0) + (a / 400 | 0);
+      var c = ( (a - 1) / 4 | 0) - ( (a - 1) / 100 | 0) + ( (a - 1) / 400 | 0);
+      var s = b - c;
+      var e = 0;
+      var f = d - 1 + 31 * (m - 1);
+    }
+    // If month mar. through dec.
+    else {
+      var a = y;
+      var b = (a / 4 | 0) - ( a / 100 | 0) + (a / 400 | 0);
+      var c = ( (a - 1) / 4 | 0) - ( (a - 1) / 100 | 0) + ( (a - 1) / 400 | 0);
+      var s = b - c;
+      var e = s + 1;
+      var f = d + ( (153 * (m - 3) + 2) / 5 | 0) + 58 + s;
+    }
+    var g = (a + b) % 7;
+    // ISO Weekday (0 is monday, 1 is tuesday etc.)
+    var d = (f + g - e) % 7;
+    var n = f + 3 - d;
+    if (n < 0){
+      var w = 53 - ( (g - s) / 5 | 0);
+    }
+    else if (n > 364 + s){
+      var w = 1;
+    }
+    else{
+      var w = (n / 7 | 0) + 1;
+    };
+
+  var currentISOWeek = ( w < 10 ? "0" : "" ) + w;
+
+
+  //Get the timezone offset
+  var timezoneOffset = currentTime.getTimezoneOffset();
+  timezoneOffset = timezoneOffset/60;
+
+  if (timezoneOffset == 7){
+    var timeZone = "PDT";	
+  } 
+  else if (timezoneOffset == 8){
+    var timeZone = "PST";
+  }
+  else {
+    var timeZone = "";
+  }
+
+  var timezoneOffsetString = "0000";	
+
+  if (timezoneOffset != 0){
+    var timezoneOffsetString = "0" + timezoneOffset*100;
+  } 
+
+  var landingUNIX = 1344230212.090; //2012-219T05:16:52
+  var landingSCLK = 397502081.314;
+  var beginSol00000SCLK = 397446468.740;
+				
+  var SCLKoffset = landingUNIX - landingSCLK;
+  var MarsTimeRatio = 1.02749125;
+				
+  var MSLtime = (new Date().getTime() / 1000) - SCLKoffset;
+				
+  if (MSLtime < landingSCLK) {
+    MSLtime = landingSCLK - MSLtime;
+    var days = Math.floor(MSLtime/(24*60*60));
+    var hours = Math.floor((MSLtime/(60*60))-(days*24));
+    var minutes = Math.floor((MSLtime/(60))-(days*24*60)-(hours*60));
+    var seconds = Math.floor(MSLtime-(days*24*60*60)-(hours*60*60)-(minutes*60));
+					
+    var MSLoutput = "Landing - " + days + ((days == 1) ? " day " : " days ") + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds;
+							
+  } else {
+    MSLtime = (MSLtime - beginSol00000SCLK)/MarsTimeRatio;
+    var sols = Math.floor(MSLtime/(24*60*60));
+    var hours = Math.floor((MSLtime/(60*60))-(sols*24));
+    var minutes = Math.floor((MSLtime/(60))-(sols*24*60)-(hours*60));
+    var seconds = Math.floor(MSLtime-(sols*24*60*60)-(hours*60*60)-(minutes*60));
+					
+    var MSLoutput = "Sol-" + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols + "M" + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds;
+						
+  }
+
+
+  // Compose the string for display
+  var fullDateString = dayFull + ", " + monthFull + " " + currentDate + ", " + yearFull;
+  var mmyyddddDateString = currentMonthPadded + "/" + currentDatePadded + "/" + yearFull;
+
+  var localDate = fullDateString + " (" + mmyyddddDateString + ")"
+  
+  var local24TimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
+  var local12TimeString = current12Hours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+
+//  var localTime = local12TimeString + " = " + local24TimeString + " " + timeZone + " (UTC-" + timezoneOffsetString + ")"
+  var localTime = local12TimeString
+
+
+  var UTCTimeString = currentUTCYear + "-" + currentUTCDOY + "T" + currentUTCHours + ":" + currentUTCMinutes + ":" + currentUTCSeconds + "  ---  Week " + currentISOWeek;
+
+  var ISOdateString = yearFull + "-" + currentMonthPadded + "-" + currentDatePadded;
+
+  // Update the time display
+  var text1=document.createTextNode(String(localDate));
+  var lb1=document.createElement("BR");
+  var text2=document.createTextNode(String(localTime));
+  var lb2=document.createElement("BR");
+  var lb3=document.createElement("BR");
+  var text3=document.createTextNode(String(UTCTimeString));
+  var lb4=document.createElement("BR");
+  var lb5=document.createElement("BR");
+  var text4=document.createTextNode(String(MSLoutput));
+
+
+//  var display=document.getElementById("date");
+//  display.appendChild(text1);
+//  display.appendChild(lb1);
+//  display.appendChild(text2);
+//  display.appendChild(lb2);
+//  display.appendChild(lb3);
+//  display.replaceChild(text1,display.childNodes[0]);
+//  display.replaceChild(lb1,display.childNodes[1]);
+//  display.replaceChild(text2,display.childNodes[2]);
+//  display.replaceChild(lb2,display.childNodes[3]);
+//  display.replaceChild(lb3,display.childNodes[4]);
+
+
+//  var display=document.getElementById("clockLocal");
+//  display.appendChild(text2);
+//  display.appendChild(lb2);
+//  display.appendChild(lb3);
+//  display.replaceChild(text2,display.childNodes[0]);
+//  display.replaceChild(lb2,display.childNodes[1]);
+//  display.replaceChild(lb3,display.childNodes[2]);
+
+
+//  var displayUTC=document.getElementById("clockUTC");
+//  displayUTC.appendChild(text3);
+//  displayUTC.appendChild(lb4);
+//  displayUTC.appendChild(lb5);
+//  displayUTC.replaceChild(text3,displayUTC.childNodes[0]);
+//  displayUTC.replaceChild(lb4,displayUTC.childNodes[1]);
+//  displayUTC.replaceChild(lb5,displayUTC.childNodes[2]);  
+  
+  
+//  var displayLMST=document.getElementById("clockLMST");  
+//  displayLMST.appendChild(text4);
+//  displayLMST.replaceChild(text4,displayLMST.childNodes[0]);
+
+
+//  var displayUTCCarosel=document.getElementById("clockUTC");
+//  displayUTC.appendChild(text3);
+//  displayUTC.appendChild(lb4);
+//  displayUTC.appendChild(lb5);
+//  displayUTC.replaceChild(text3,displayUTC.childNodes[0]);
+//  displayUTC.replaceChild(lb4,displayUTC.childNodes[1]);
+//  displayUTC.replaceChild(lb5,displayUTC.childNodes[2]);  
+  
+  
+var displayLMST=document.getElementById("clockLMST");  
+displayLMST.appendChild(text4);
+displayLMST.replaceChild(text4,displayLMST.childNodes[0]);
+
+}
+</script>
+</head>
+
+<body style="background-color:black;" onload="updateClock(); setInterval('updateClock()', 1000 )">
+<br><br><br><br><br><br><br><br>
+<div style="text-align: center;">
+	<span id="date" style="font-family: Helvetica; font-weight: Bold; font-size: 300%; color: Peachpuff">&nbsp;</span>
+	<span id="clockUTC" style="font-family: Helvetica; font-weight: Bold; font-size: 200%; color: Blue">&nbsp;</span>
+	<span id="clockLMST" style="font-family: Helvetica; font-weight: Bold; font-size: 650%; color: Red">&nbsp;</span>
+</div>
+
+<!--Add NIST clock widget (flash)
+
+<object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0"
+    style="WIDTH: 177px; HEIGHT: 125px;" type="application/x-shockwave-flash" data="http://time.gov/widget/NISTtimewidget.swf">
+    <param name="movie" value="http://time.gov/widget/NISTtimewidget.swf">
+    <embed src="http://time.gov/widget/NISTtimewidget.swf" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
+    </embed>
+</object>
+-->
+
+<!--Add NIST clock widget (no flash)-->
+
+<!--
+<object data=http://time.gov/widget.html width="200" height="200"> <embed src=http://time.gov/widget.html width="200" height="200"> </embed> Error: Embedded data could not be displayed. </object>
+-->
+
+<!--
+<div id="appcontainer"></div>
+<div id="lzsplash" style="z-index: 10000000; top: 0; left: 0; width: 178px; height: 125px; position: fixed; display: table"><p style="display: table-cell; vertical-align: middle;"></p></div>
+<script type="text/javascript" defer>
+	lz.embed.resizeWindow('178', '125');
+        lz.embed.dhtml({url: 'nist_time.lzx.js', lfcurl: 'lps/includes/lfc/LFCdhtml.js', serverroot: 'lps/resources/', bgcolor: '#ffffff', width: '178', height: '125', id: 'lzapp', accessible: 'false', cancelmousewheel: false, cancelkeyboardcontrol: false, skipchromeinstall: false, usemastersprite: false, approot: '', appenddivid: 'appcontainer'});
+	lz.embed.applications.lzapp.onload = function loaded() {
+		// called when this application is done loading
+		var el = document.getElementById('lzsplash');
+		if (el.parentNode) {
+			el.parentNode.removeChild(el);
+		}
+	}
+</script>
+<noscript>
+Please enable JavaScript in order to use this application.
+</noscript>
+-->
+<br>
+<br>
+<!--
+<script type="text/javascript" language="javascript" src="http://en.dnstools.ch/out/1.js"></script><noscript><a href="http://en.dnstools.ch/show-my-ip.html" target="_blank">How to find my IP</a></noscript>
+-->
+<br>
+</body>
+</html>
