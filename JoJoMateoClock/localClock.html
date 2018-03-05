@@ -307,7 +307,9 @@ function updateClock (){
   var localDate = fullDateString + " (" + mmyyddddDateString + ")"
   
   var local24TimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
-  var local12TimeString = current12Hours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+//  var local12TimeString = current12Hours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
+  var local12TimeString = current12Hours + ":" + currentMinutes + ":" + currentSeconds + "";
+  var locat12TimeOfDay = "  " + timeOfDay; 
 
 //  var localTime = local12TimeString + " = " + local24TimeString + " " + timeZone + " (UTC-" + timezoneOffsetString + ")"
   var localTime = local12TimeString
@@ -327,6 +329,8 @@ function updateClock (){
   var lb4=document.createElement("BR");
   var lb5=document.createElement("BR");
   var text4=document.createTextNode(String(MSLoutput));
+  var lb6=document.createElement("BR");
+  var text5=document.createTextNode(String(locat12TimeOfDay));
 
 
   var display=document.getElementById("date");
@@ -340,6 +344,12 @@ function updateClock (){
 //  display.replaceChild(text2,display.childNodes[2]);
 //  display.replaceChild(lb2,display.childNodes[3]);
 //  display.replaceChild(lb3,display.childNodes[4]);
+
+
+  var display=document.getElementById("timeOfDayLocal");
+  display.appendChild(text5);
+  display.replaceChild(text5,display.childNodes[0]);
+
 
   var display=document.getElementById("clockLocal");
   display.appendChild(text2);
@@ -375,7 +385,8 @@ function updateClock (){
 </div>
 <hr>
 <div style="text-align: center;">
-	<span id="clockLocal" style="font-family: Helvetica; font-weight: Bold; font-size: 1100%; color: Peachpuff">&nbsp;</span>
+	<span id="clockLocal" style="font-family: Helvetica; font-weight: Bold; font-size: 1200%; color: Peachpuff">&nbsp;</span>
+  <span id="timeOfDayLocal" style="font-family: Helvetica; font-weight: Bold; font-size: 300%; color: Peachpuff">&nbsp;</span>
 </div>
 <!--Add NIST clock widget (flash)
 
@@ -411,11 +422,8 @@ function updateClock (){
 Please enable JavaScript in order to use this application.
 </noscript>
 -->
-<br>
-<br>
 <!--
 <script type="text/javascript" language="javascript" src="http://en.dnstools.ch/out/1.js"></script><noscript><a href="http://en.dnstools.ch/show-my-ip.html" target="_blank">How to find my IP</a></noscript>
 -->
-<br>
 </body>
 </html>

@@ -294,8 +294,9 @@ function updateClock (){
     var hours = Math.floor((MSLtime/(60*60))-(sols*24));
     var minutes = Math.floor((MSLtime/(60))-(sols*24*60)-(hours*60));
     var seconds = Math.floor(MSLtime-(sols*24*60*60)-(hours*60*60)-(minutes*60));
-					
-    var MSLoutput = "Sol-" + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols + "M" + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds;
+		
+    var MSLsol = "Sol " + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols;			
+    var MSLoutput =  ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds + " LMST";
 						
   }
 
@@ -327,7 +328,8 @@ function updateClock (){
   var lb4=document.createElement("BR");
   var lb5=document.createElement("BR");
   var text4=document.createTextNode(String(MSLoutput));
-
+  var lb6=document.createElement("BR");
+  var text5=document.createTextNode(String(MSLsol));
 
 //  var display=document.getElementById("date");
 //  display.appendChild(text1);
@@ -378,6 +380,11 @@ var displayLMST=document.getElementById("clockLMST");
 displayLMST.appendChild(text4);
 displayLMST.replaceChild(text4,displayLMST.childNodes[0]);
 
+
+var displayLMSTsol=document.getElementById("solLMST");  
+displayLMSTsol.appendChild(text5);
+displayLMSTsol.replaceChild(text5,displayLMSTsol.childNodes[0]);
+
 }
 </script>
 </head>
@@ -387,7 +394,9 @@ displayLMST.replaceChild(text4,displayLMST.childNodes[0]);
 <div style="text-align: center;">
 	<span id="date" style="font-family: Helvetica; font-weight: Bold; font-size: 300%; color: Peachpuff">&nbsp;</span>
 	<span id="clockUTC" style="font-family: Helvetica; font-weight: Bold; font-size: 200%; color: Blue">&nbsp;</span>
-	<span id="clockLMST" style="font-family: Helvetica; font-weight: Bold; font-size: 650%; color: Red">&nbsp;</span>
+  <span id="solLMST" style="font-family: Helvetica; font-weight: Bold; font-size: 550%; color: Red">&nbsp;</span>
+	<br>
+  <span id="clockLMST" style="font-family: Helvetica; font-weight: Bold; font-size: 550%; color: Red">&nbsp;</span>
 </div>
 
 <!--Add NIST clock widget (flash)

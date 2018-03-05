@@ -313,7 +313,8 @@ function updateClock (){
   var localTime = local12TimeString
 
 
-  var UTCTimeString = currentUTCYear + "-" + currentUTCDOY + "T" + currentUTCHours + ":" + currentUTCMinutes + ":" + currentUTCSeconds + "  ---  Week " + currentISOWeek;
+  var UTCTimeString = currentUTCYear + "-" + currentUTCDOY + "T" + currentUTCHours + ":" + currentUTCMinutes + ":" + currentUTCSeconds;
+  var UTCWeekString = "Week " + currentISOWeek;
 
   var ISOdateString = yearFull + "-" + currentMonthPadded + "-" + currentDatePadded;
 
@@ -327,6 +328,9 @@ function updateClock (){
   var lb4=document.createElement("BR");
   var lb5=document.createElement("BR");
   var text4=document.createTextNode(String(MSLoutput));
+  var lb6=document.createElement("BR");
+  var text5=document.createTextNode(String(UTCWeekString));
+  
 
 
 //  var display=document.getElementById("date");
@@ -353,10 +357,14 @@ function updateClock (){
 var displayUTC=document.getElementById("clockUTC");
 displayUTC.appendChild(text3);
 displayUTC.appendChild(lb4);
-displayUTC.appendChild(lb5);
+//displayUTC.appendChild(lb5);
 displayUTC.replaceChild(text3,displayUTC.childNodes[0]);
 displayUTC.replaceChild(lb4,displayUTC.childNodes[1]);
-displayUTC.replaceChild(lb5,displayUTC.childNodes[2]);  
+//displayUTC.replaceChild(lb5,displayUTC.childNodes[2]);  
+
+var displayUTCWeek=document.getElementById("weekUTC");
+displayUTCWeek.appendChild(text5);
+displayUTCWeek.replaceChild(text5,displayUTCWeek.childNodes[0]);
   
 //  var displayLMST=document.getElementById("clockLMST");  
 //  displayLMST.appendChild(text4);
@@ -370,7 +378,8 @@ displayUTC.replaceChild(lb5,displayUTC.childNodes[2]);
 <br><br><br><br><br><br><br><br><br>
 <div style="text-align: center;">
 	<span id="date" style="font-family: Helvetica; font-weight: Bold; font-size: 300%; color: Peachpuff">&nbsp;</span>
-	<span id="clockUTC" style="font-family: Helvetica; font-weight: Bold; font-size: 425%; color: Blue">&nbsp;</span>
+	<span id="clockUTC" style="font-family: Helvetica; font-weight: Bold; font-size: 500%; color: CornflowerBlue">&nbsp;</span>
+  <span id="weekUTC" style="font-family: Helvetica; font-weight: Bold; font-size: 500%; color: CornflowerBlue">&nbsp;</span>
 	<span id="clockLMST" style="font-family: Helvetica; font-weight: Bold; font-size: 200%; color: Red">&nbsp;</span>
 </div>
 <!--Add NIST clock widget (flash)
