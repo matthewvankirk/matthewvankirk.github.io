@@ -390,12 +390,12 @@ function updateClock (){
   displayPhone.appendChild(lb6);
   displayPhone.appendChild(text6);
   displayPhone.appendChild(lb7);
-  displayPhone.appendChild(lb8);
+//  displayPhone.appendChild(lb8);
   displayPhone.replaceChild(text5,displayPhone.childNodes[0]);
   displayPhone.replaceChild(lb6,displayPhone.childNodes[1]);
   displayPhone.replaceChild(text6,displayPhone.childNodes[2]);
   displayPhone.replaceChild(lb7,displayPhone.childNodes[3]);
-  displayPhone.replaceChild(lb8,displayPhone.childNodes[4]);
+//  displayPhone.replaceChild(lb8,displayPhone.childNodes[4]);
 
   var displayPhone2=document.getElementById("timePhone");
   displayPhone2.appendChild(text7);
@@ -404,26 +404,26 @@ function updateClock (){
   displayPhone2.appendChild(lb10);
   displayPhone2.appendChild(text9);
   displayPhone2.appendChild(lb11);
-  displayPhone2.appendChild(lb12);
+//  displayPhone2.appendChild(lb12);
   displayPhone2.replaceChild(text7,displayPhone2.childNodes[0]);
   displayPhone2.replaceChild(lb9,displayPhone2.childNodes[1]);
   displayPhone2.replaceChild(text8,displayPhone2.childNodes[2]);
   displayPhone2.replaceChild(lb10,displayPhone2.childNodes[3]);
   displayPhone2.replaceChild(text9,displayPhone2.childNodes[4]);
   displayPhone2.replaceChild(lb11,displayPhone2.childNodes[5]);
-  displayPhone2.replaceChild(lb12,displayPhone2.childNodes[6]);
+//  displayPhone2.replaceChild(lb12,displayPhone2.childNodes[6]);
 
   var displayPhone3=document.getElementById("utcPhone");
   displayPhone3.appendChild(text10);
   displayPhone3.appendChild(lb13);
   displayPhone3.appendChild(text11);
   displayPhone3.appendChild(lb14);
-  displayPhone3.appendChild(lb15);
+//  displayPhone3.appendChild(lb15);
   displayPhone3.replaceChild(text10,displayPhone3.childNodes[0]);
   displayPhone3.replaceChild(lb13,displayPhone3.childNodes[1]);
   displayPhone3.replaceChild(text11,displayPhone3.childNodes[2]);
   displayPhone3.replaceChild(lb14,displayPhone3.childNodes[3]);
-  displayPhone3.replaceChild(lb15,displayPhone3.childNodes[4]);
+//  displayPhone3.replaceChild(lb15,displayPhone3.childNodes[4]);
 
 
   var displayPhone4=document.getElementById("lmstPhone");
@@ -450,10 +450,21 @@ function updateClock (){
 <br>
 <br>
 <br>
+<br>
+<br>
 <div style="text-align: center;">
   <span id="datePhone" style="font-family: Arial; font-weight: Bold; font-size: 350%; color: White">&nbsp;</span>
+  <br>
+  <hr>
+  <br>
   <span id="timePhone" style="font-family: Arial; font-weight: Bold; font-size: 500%; color: White">&nbsp;</span>
+  <br>
+  <hr>
+  <br>
   <span id="utcPhone" style="font-family: Arial; font-weight: Bold; font-size: 500%; color: darkblue">&nbsp;</span>
+  <br>
+  <hr>
+  <br>
   <span id="lmstPhone" style="font-family: Arial; font-weight: Bold; font-size: 500%; color: darkred">&nbsp;</span>
 
   <span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: White">&nbsp;</span>
