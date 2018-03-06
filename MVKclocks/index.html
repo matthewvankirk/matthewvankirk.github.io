@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<link rel="shortcut icon" href="./MVK Clocks.ico">
+<link rel="shortcut icon" href="./index.ico">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="apple-touch-icon" href="./iOS-icon.png" />
 <link rel="apple-touch-startup-image" href="./iOS-startup.png" />
@@ -270,6 +270,8 @@ function updateClock (){
   var MarsTimeRatio = 1.02749125;
 				
   var MSLtime = (new Date().getTime() / 1000) - SCLKoffset;
+  var MSLtimeValue = (new Date().getTime() / 1000) - SCLKoffset;
+
 				
   if (MSLtime < landingSCLK) {
     MSLtime = landingSCLK - MSLtime;
@@ -287,10 +289,13 @@ function updateClock (){
     var minutes = Math.floor((MSLtime/(60))-(sols*24*60)-(hours*60));
     var seconds = Math.floor(MSLtime-(sols*24*60*60)-(hours*60*60)-(minutes*60));
 					
-    var MSLoutput = "Sol-" + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols + "M" + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds;
+    var MSLoutput = "Sol " + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols + " " + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds + " LMST";
 						
   }
 
+
+  var SCLKvalue = Math.floor(MSLtimeValue - 1658);
+  var SCLKstring = "(SCLK = " + SCLKvalue + ")";
 
   // Compose the string for display
   var fullDateString = dayFull + ", " + monthFull + " " + currentDate + ", " + yearFull;
@@ -317,6 +322,8 @@ function updateClock (){
   var lb4=document.createElement("BR");
   var lb5=document.createElement("BR");
   var text4=document.createTextNode(String(MSLoutput));
+  var lb6=document.createElement("BR");
+  var text5=document.createTextNode(String(SCLKstring));
 
 
   var display=document.getElementById("clock");
@@ -343,7 +350,12 @@ function updateClock (){
   
   var displayLMST=document.getElementById("clockLMST");  
   displayLMST.appendChild(text4);
+  displayLMST.appendChild(lb6);
+  displayLMST.appendChild(text5);
   displayLMST.replaceChild(text4,displayLMST.childNodes[0]);
+  displayLMST.replaceChild(lb6,displayLMST.childNodes[1]);
+  displayLMST.replaceChild(text5,displayLMST.childNodes[2]);
+
 
 }
 </script>
@@ -355,10 +367,33 @@ function updateClock (){
 <br>
 <br>
 <br>
-<div style="text-align: center;">
-	<span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: White">&nbsp;</span>
-	<span id="clockUTC" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: darkblue">&nbsp;</span>
-	<span id="clockLMST" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: darkred">&nbsp;</span>
-</div>	
+<center>
+<table>
+  <tr>
+    <td>
+      <center><img src="JPL.png"></p></center>
+    </td>
+    <td>
+      <center><span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: White">&nbsp;</span></center>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <center><img src="Earth.png"></center>
+    </td>
+    <td>
+      <center><span id="clockUTC" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: darkblue">&nbsp;</span></center>
+    </td>
+	</tr>
+  <tr>
+    <td>
+      <center><img src="Curiosity.png"></center>
+    </td>
+    <td>
+      <center><span id="clockLMST" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: darkred">&nbsp;</span></center>
+    </td>
+  </tr>
+</table>
+</center>
 </body>
 </html>
