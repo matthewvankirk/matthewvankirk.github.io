@@ -300,8 +300,8 @@ function updateClock (){
   var SCLKstring = "(SCLK = " + SCLKvalue + ")";
 
   // Compose the string for display
-  //var fullDateString = dayFull + ", " + monthFull + " " + currentDate + ", " + yearFull;
-  var fullDateString = "Wednesday" + ", " + "September" + " " + "30" + ", " + "2018";
+  var fullDateString = dayFull + ", " + monthFull + " " + currentDate + ", " + yearFull;
+  //var fullDateString = "Wednesday" + ", " + "September" + " " + "30" + ", " + "2018";
   var mmyyddddDateString = currentMonthPadded + "/" + currentDatePadded + "/" + yearFull;
 
   var localDate = fullDateString + " (" + mmyyddddDateString + ")";
@@ -446,6 +446,11 @@ function updateClock (){
 </head>
 
 <body style="background-color:dimgray;" onload="updateClock(); setInterval('updateClock()', 1000 )">
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
