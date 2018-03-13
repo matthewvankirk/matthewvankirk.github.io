@@ -2,19 +2,11 @@
 <html>
 <head>
 
-<link rel="shortcut icon" href="./MVK Clocks.ico">
+<link rel="shortcut icon" href="./index.ico">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <link rel="apple-touch-icon" href="./iOS-icon.png" />
 <link rel="apple-touch-startup-image" href="./iOS-startup.png" />
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<title>Clocks</title>
-<meta http-equiv="refresh" content="600">
+<title>Seq Room Clock</title>
 
 <script type="text/javascript">
 function updateClock (){
@@ -278,6 +270,8 @@ function updateClock (){
   var MarsTimeRatio = 1.02749125;
 				
   var MSLtime = (new Date().getTime() / 1000) - SCLKoffset;
+  var MSLtimeValue = (new Date().getTime() / 1000) - SCLKoffset;
+
 				
   if (MSLtime < landingSCLK) {
     MSLtime = landingSCLK - MSLtime;
@@ -295,10 +289,15 @@ function updateClock (){
     var minutes = Math.floor((MSLtime/(60))-(sols*24*60)-(hours*60));
     var seconds = Math.floor(MSLtime-(sols*24*60*60)-(hours*60*60)-(minutes*60));
 					
-    var MSLoutput = "Sol-" + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols + "M" + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds;
+    var MSLoutput = "Sol " + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols + " " + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds + " LMST";
+    var MSLsol = "Sol " + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols;
+    var MSLlmst = ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds + " LMST";
 						
   }
 
+
+  var SCLKvalue = Math.floor(MSLtimeValue - 1658);
+  var SCLKstring = "(SCLK = " + SCLKvalue + ")";
 
   // Compose the string for display
   var fullDateString = dayFull + ", " + monthFull + " " + currentDate + ", " + yearFull;
@@ -307,13 +306,9 @@ function updateClock (){
   var localDate = fullDateString + " (" + mmyyddddDateString + ")"
   
   var local24TimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
-//  var local12TimeString = current12Hours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
-  var local12TimeString = current12Hours + ":" + currentMinutes + ":" + currentSeconds + "";
-  var locat12TimeOfDay = "  " + timeOfDay; 
+  var local12TimeString = current12Hours + ":" + currentMinutes + ":" + currentSeconds + " " + timeOfDay;
 
-//  var localTime = local12TimeString + " = " + local24TimeString + " " + timeZone + " (UTC-" + timezoneOffsetString + ")"
-  var localTime = local12TimeString
-
+  var localTime = local12TimeString + " = " + local24TimeString + " " + timeZone + " (UTC-" + timezoneOffsetString + ")"
 
   var UTCTimeString = currentUTCYear + "-" + currentUTCDOY + "T" + currentUTCHours + ":" + currentUTCMinutes + ":" + currentUTCSeconds + "  ---  Week " + currentISOWeek;
 
@@ -330,35 +325,27 @@ function updateClock (){
   var lb5=document.createElement("BR");
   var text4=document.createTextNode(String(MSLoutput));
   var lb6=document.createElement("BR");
-  var text5=document.createTextNode(String(locat12TimeOfDay));
+  var text5=document.createTextNode(String(SCLKstring));
+  var lb7=document.createElement("BR");
+  var text6=document.createTextNode(String(MSLsol));
+  var lb8=document.createElement("BR");
+  var text7=document.createTextNode(String(MSLlmst));
 
 
-  var display=document.getElementById("date");
-  display.appendChild(text1);
+
+//  var display=document.getElementById("clock");
+//  display.appendChild(text1);
 //  display.appendChild(lb1);
 //  display.appendChild(text2);
 //  display.appendChild(lb2);
 //  display.appendChild(lb3);
-  display.replaceChild(text1,display.childNodes[0]);
+//  display.replaceChild(text1,display.childNodes[0]);
 //  display.replaceChild(lb1,display.childNodes[1]);
 //  display.replaceChild(text2,display.childNodes[2]);
 //  display.replaceChild(lb2,display.childNodes[3]);
 //  display.replaceChild(lb3,display.childNodes[4]);
-
-
-  var display=document.getElementById("timeOfDayLocal");
-  display.appendChild(text5);
-  display.replaceChild(text5,display.childNodes[0]);
-
-
-  var display=document.getElementById("clockLocal");
-  display.appendChild(text2);
-//  display.appendChild(lb2);
-//  display.appendChild(lb3);
-  display.replaceChild(text2,display.childNodes[0]);
-//  display.replaceChild(lb2,display.childNodes[1]);
-//  display.replaceChild(lb3,display.childNodes[2]);
-
+//
+//
 //  var displayUTC=document.getElementById("clockUTC");
 //  displayUTC.appendChild(text3);
 //  displayUTC.appendChild(lb4);
@@ -366,64 +353,62 @@ function updateClock (){
 //  displayUTC.replaceChild(text3,displayUTC.childNodes[0]);
 //  displayUTC.replaceChild(lb4,displayUTC.childNodes[1]);
 //  displayUTC.replaceChild(lb5,displayUTC.childNodes[2]);  
-    
-//  var displayLMST=document.getElementById("clockLMST");  
-//  displayLMST.appendChild(text4);
-//  displayLMST.replaceChild(text4,displayLMST.childNodes[0]);
+  
+  
+  var displayLMST=document.getElementById("clockLMST");  
+//  displayLMST.appendChild(text6);
+//  displayLMST.appendChild(lb8);
+//  displayLMST.appendChild(text7);
+//  displayLMST.replaceChild(text6,displayLMST.childNodes[0]);
+//  displayLMST.replaceChild(lb8,displayLMST.childNodes[1]);
+//  displayLMST.replaceChild(text7,displayLMST.childNodes[2]);
 
+  displayLMST.appendChild(text4);
+  displayLMST.replaceChild(text4,displayLMST.childNodes[0]);
 
 }
 </script>
 </head>
 
-<body style="background-color:black;" onload="updateClock(); setInterval('updateClock()', 1000 )">
-<br><br>
-<div style="text-align: center;">
-	<span id="date" style="font-family: Helvetica; font-weight: Bold; font-size: 300%; color: Peachpuff">&nbsp;</span>
-	<span id="clockUTC" style="font-family: Helvetica; font-weight: Bold; font-size: 200%; color: Blue">&nbsp;</span>
-	<span id="clockLMST" style="font-family: Helvetica; font-weight: Bold; font-size: 200%; color: Red">&nbsp;</span>
-</div>
-<hr>
-<div style="text-align: center;">
-	<span id="clockLocal" style="font-family: Helvetica; font-weight: Bold; font-size: 1200%; color: Peachpuff">&nbsp;</span>
-  <span id="timeOfDayLocal" style="font-family: Helvetica; font-weight: Bold; font-size: 300%; color: Peachpuff">&nbsp;</span>
-</div>
-<!--Add NIST clock widget (flash)
-
-<object codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0"
-    style="WIDTH: 177px; HEIGHT: 125px;" type="application/x-shockwave-flash" data="http://time.gov/widget/NISTtimewidget.swf">
-    <param name="movie" value="http://time.gov/widget/NISTtimewidget.swf">
-    <embed src="http://time.gov/widget/NISTtimewidget.swf" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer">
-    </embed>
-</object>
--->
-
-<!--Add NIST clock widget (no flash)-->
-
+<body style="background-color:white;" onload="updateClock(); setInterval('updateClock()', 1000 )">
+<br>
+<br>
+<br>
+<br>
+<br>
+<center>
+<table>
 <!--
-<object data=http://time.gov/widget.html width="200" height="200"> <embed src=http://time.gov/widget.html width="200" height="200"> </embed> Error: Embedded data could not be displayed. </object>
+  <tr>
+    <td>
+      <center><img src="JPL.png"></p></center>
+    </td>
+    <td>
+      <center><span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: White">&nbsp;</span></center>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <center><img src="Earth.png"></center>
+    </td>
+    <td>
+      <center><span id="clockUTC" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: darkblue">&nbsp;</span></center>
+    </td>
+	</tr>
 -->
 
-<!--
-<div id="appcontainer"></div>
-<div id="lzsplash" style="z-index: 10000000; top: 0; left: 0; width: 178px; height: 125px; position: fixed; display: table"><p style="display: table-cell; vertical-align: middle;"></p></div>
-<script type="text/javascript" defer>
-	lz.embed.resizeWindow('178', '125');
-        lz.embed.dhtml({url: 'nist_time.lzx.js', lfcurl: 'lps/includes/lfc/LFCdhtml.js', serverroot: 'lps/resources/', bgcolor: '#ffffff', width: '178', height: '125', id: 'lzapp', accessible: 'false', cancelmousewheel: false, cancelkeyboardcontrol: false, skipchromeinstall: false, usemastersprite: false, approot: '', appenddivid: 'appcontainer'});
-	lz.embed.applications.lzapp.onload = function loaded() {
-		// called when this application is done loading
-		var el = document.getElementById('lzsplash');
-		if (el.parentNode) {
-			el.parentNode.removeChild(el);
-		}
-	}
-</script>
-<noscript>
-Please enable JavaScript in order to use this application.
-</noscript>
--->
-<!--
-<script type="text/javascript" language="javascript" src="http://en.dnstools.ch/out/1.js"></script><noscript><a href="http://en.dnstools.ch/show-my-ip.html" target="_blank">How to find my IP</a></noscript>
--->
+  <tr>
+  	<iframe src="https://mslreports.jpl.nasa.gov/surface/tactical/big_display/index.php" height="650" width="1120" style="border:none; background-color:white;"></iframe>
+  </tr>
+  <tr style="background-color:white">
+    <td>
+      <img src="Curiosity.png">
+    </td>
+    <td>
+      <span id="clockLMST" style="font-family: Arial; font-weight: Bold; font-size: 400%; color: darkred">&nbsp;</span>
+    </td>
+  </tr>
+</table>
+</center>
 </body>
 </html>
