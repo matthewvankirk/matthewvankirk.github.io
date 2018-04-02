@@ -10,7 +10,7 @@
 <style>
 body {
 	
-	background-image: url('grunge_patterns.jpg');
+	background-image: url('Wedding Background.png');
 	background-attachment: fixed;
 	color: #333;
 }
@@ -63,7 +63,7 @@ div.vertical {
 				<div class="box">				
 					<input style="margin: 16px; text-align: center;" id="password" type="password" placeholder="password" /> <br />
 					<button id="loginbutton" type="button">Enter</button>
-					<p id="wrongPassword" style="display: none">wrong password</p>
+					<p id="wrongPassword" style="display: none">Incorrect Password</p>
 				</div>
 			</div>
 		</div>
@@ -94,7 +94,7 @@ div.vertical {
 			
 				parent.location.hash= hash;
 				//$("#wrongPassword").show();
-				$("#password").attr("placeholder","wrong password");
+				$("#password").attr("placeholder","Incorrect Password");
 				$("#password").val("");
 			}
 		});
