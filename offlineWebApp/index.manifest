@@ -1,0 +1,24 @@
+CACHE MANIFEST
+
+#File paths should be relative to the location of the manifest file
+background.png
+image.html
+image.png
+index.ico
+index.png
+iOS-icon-57x57.png
+iOS-icon-72x72.png
+iOS-icon-114x114.png
+iOS-icon-144x144.png
+launch-640x1136.png
+launch-750x1294.png
+launch-1125x2436.png
+launch-1242x2148.png
+launch-1536x2048.png
+launch-1668x2224.png
+launch-2048x2732.png
+oclose.png
+oopen.png
+outline.css
+outline.js
+warning.png
