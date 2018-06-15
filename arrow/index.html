@@ -59,10 +59,6 @@ html, body, #wrapper {
     </tr>
 </table>
 
-<footer><p align="center"><input type="button" id="toggle" value="Allow sleep" /></p></footer>
-
-<script src="NoSleep.min.js"></script>
-
 <script>
 var min = Math.ceil(1);
 var max = Math.floor(2);
@@ -78,8 +74,15 @@ function display() {
     }
     x[myIndex-1].style.display = "block";
 }
+</script>
 
+<script src="NoSleep.min.js"></script>
+
+<footer><p align="center"><input type="button" id="toggle" value="Allow sleep" /></p></footer>
+
+<script>
 var noSleep = new NoSleep();
+
 noSleep.enable();
 var wakeLockEnabled = true;
 
@@ -95,7 +98,6 @@ toggleEl.addEventListener('click', function() {
     toggleEl.value = "Stay awake";
   }
 }, false);
-
 </script>
 
 </body>
