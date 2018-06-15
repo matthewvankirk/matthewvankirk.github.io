@@ -5,7 +5,7 @@
 
 <title>Which way?</title>
 
-<meta http-equiv="refresh" content="600" name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="3" name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <link rel="stylesheet" href="w3.css">
@@ -78,26 +78,28 @@ function display() {
 
 <script src="NoSleep.min.js"></script>
 
-<footer><p align="center"><input type="button" id="toggle" value="Allow sleep" /></p></footer>
+<footer><p hidden align="center" style="color:white"><input type="checkbox" id="toggle" checked onchange="isChecked(this.id)"/> Stay awake?</p></footer>
 
 <script>
 var noSleep = new NoSleep();
+var wakeLockEnabled = false;
 
-noSleep.enable();
-var wakeLockEnabled = true;
+window.onload = function () { 
+  noSleep.enable(); // keep the screen on!
+  wakeLockEnabled = true;
+}
 
-var toggleEl = document.querySelector("#toggle");
-toggleEl.addEventListener('click', function() {
-  if (!wakeLockEnabled) {
-    noSleep.enable(); // keep the screen on!
-    wakeLockEnabled = true;
-    toggleEl.value = "Allow sleep";
-  } else {
-    noSleep.disable(); // let the screen turn off.
-    wakeLockEnabled = false;
-    toggleEl.value = "Stay awake";
-  }
-}, false);
+function isChecked(id) {
+    var inputCheckbox = document.getElementById(id);
+    if(!inputCheckbox.checked) {
+        noSleep.disable(); // let the screen turn off.
+        wakeLockEnabled = false;
+    } else {
+        noSleep.enable(); // keep the screen on!
+        wakeLockEnabled = true;
+    }
+}
+
 </script>
 
 </body>
