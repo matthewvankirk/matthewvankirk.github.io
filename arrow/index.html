@@ -59,6 +59,10 @@ html, body, #wrapper {
     </tr>
 </table>
 
+<footer><p align="center"><input type="button" id="toggle" value="Allow sleep" /></p></footer>
+
+<script src="NoSleep.min.js"></script>
+
 <script>
 var min = Math.ceil(1);
 var max = Math.floor(2);
@@ -74,28 +78,24 @@ function display() {
     }
     x[myIndex-1].style.display = "block";
 }
-</script>
 
-<script src="NoSleep.min.js"></script>
+var noSleep = new NoSleep();
+noSleep.enable();
+var wakeLockEnabled = true;
 
-<footer><p align="center"><input type="button" id="toggle" value="Stay awake" /></p></footer>
+var toggleEl = document.querySelector("#toggle");
+toggleEl.addEventListener('click', function() {
+  if (!wakeLockEnabled) {
+    noSleep.enable(); // keep the screen on!
+    wakeLockEnabled = true;
+    toggleEl.value = "Allow sleep";
+  } else {
+    noSleep.disable(); // let the screen turn off.
+    wakeLockEnabled = false;
+    toggleEl.value = "Stay awake";
+  }
+}, false);
 
-<script>
-  var noSleep = new NoSleep();
-
-  var wakeLockEnabled = false;
-  var toggleEl = document.querySelector("#toggle");
-  toggleEl.addEventListener('click', function() {
-    if (!wakeLockEnabled) {
-      noSleep.enable(); // keep the screen on!
-      wakeLockEnabled = true;
-      toggleEl.value = "Allow sleep";
-    } else {
-      noSleep.disable(); // let the screen turn off.
-      wakeLockEnabled = false;
-      toggleEl.value = "Stay awake";
-    }
-  }, false);
 </script>
 
 </body>
