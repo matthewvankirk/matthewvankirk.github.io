@@ -5,7 +5,7 @@
 
 <title>Which way?</title>
 
-<meta http-equiv="refresh" content="3" name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="600" name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <link rel="stylesheet" href="w3.css">
@@ -23,8 +23,6 @@
 <link rel="apple-touch-startup-image" href="launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
 <link rel="apple-touch-startup-image" href="launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
-
-<script src="NoSleep.min.js"></script>
 
 </head>
 
@@ -45,7 +43,7 @@ html, body, #wrapper {
 
 </style>
 
-<body onload="noSleep.enable()" style="background-color:black">
+<body style="background-color:black">
 
 
 <h2 class="w3-center" style="color:white">Which way?</h2>
@@ -76,6 +74,28 @@ function display() {
     }
     x[myIndex-1].style.display = "block";
 }
+</script>
+
+<script src="NoSleep.min.js"></script>
+
+<footer><p align="center"><input type="button" id="toggle" value="Stay awake" /></p></footer>
+
+<script>
+  var noSleep = new NoSleep();
+
+  var wakeLockEnabled = false;
+  var toggleEl = document.querySelector("#toggle");
+  toggleEl.addEventListener('click', function() {
+    if (!wakeLockEnabled) {
+      noSleep.enable(); // keep the screen on!
+      wakeLockEnabled = true;
+      toggleEl.value = "Allow sleep";
+    } else {
+      noSleep.disable(); // let the screen turn off.
+      wakeLockEnabled = false;
+      toggleEl.value = "Stay awake";
+    }
+  }, false);
 </script>
 
 </body>
