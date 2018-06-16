@@ -5,7 +5,7 @@
 
 <title>Which way?</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="600" name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <link rel="stylesheet" href="w3.css">
@@ -27,6 +27,7 @@
 </head>
 
 <style>
+.mySlides {display:none;}
 
 html, body, #wrapper {
    height:100%;
@@ -50,62 +51,60 @@ html, body, #wrapper {
 <table id="wrapper">
     <tr>
         <td>
-            <img id="img" src="both.png">
+            <div class="w3-content w3-section" style="max-width:75%">
+                <img class="mySlides" src="left.png" style="width:100%">
+                <img class="mySlides" src="right.png" style="width:100%">
+            </div>	
         </td>
     </tr>
 </table>
 
-<p align="center"><input type="image" src="settings.png" alt="Settings" id="settingsButton" width="32" height="32" onclick="toggleSettings()" /></p>
-
-<footer id="settings"><p align="center" style="color:white">
-    <br>
-    Interval (seconds): <input type="text" id="interval" value="3"> <input type="button" id="intervalButton" value="Set" onclick="changeInterval()" /><br><br>
-    <input type="checkbox" id="toggle" onchange="isChecked(this.id)"/> Stay awake?<br><br>
-</p></footer>
-
-
 <script>
+var loop = 1;
 
-document.getElementById("settings").style.display="none";
+while (loop < 10) {
+  var min = Math.ceil(1);
+  var max = Math.floor(2);
+  var myIndex = Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 
-var images = new Array()
-images[0] = "left.png";
-images[1] = "right.png";
+  //display();
 
-var min = Math.ceil(1);
-var max = Math.floor(images.length);
-var myIndex=0;
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none"; 
+    }
+    x[myIndex-1].style.display = "block";
 
-changeImage();
-var update = setInterval("changeImage()", 3000);
-
-function changeInterval() {
-    var input = document.getElementById("interval");
-    var int = input.value;
-    clearInterval(update);
-    update = setInterval("changeImage()", (int * 1000));
+  alert (myIndex);
+  loop++;
 }
 
-function changeImage() {
-    myIndex = Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
-    document.getElementById("img").src=images[myIndex - 1]
+function display() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none"; 
+    }
+    x[myIndex-1].style.display = "block";
 }
 
-function toggleSettings()
-{
-    var display = document.getElementById("settings").style.display;
-    if(display=="none")
-        document.getElementById("settings").style.display="block";
-    else
-        document.getElementById("settings").style.display="none";
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
 
 </script>
 
 <script src="NoSleep.min.js"></script>
 
-<script>
+<footer><p align="center" style="color:white"><input type="checkbox" id="toggle" onchange="isChecked(this.id)"/> Stay awake?</p></footer>
 
+<script>
 var noSleep = new NoSleep();
 var wakeLockEnabled = false;
 
