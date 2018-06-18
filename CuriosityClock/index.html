@@ -1,12 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html manifest="index.manifest">
 <head>
 
-<link rel="shortcut icon" href="./index.ico">
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="apple-touch-icon" href="./iOS-icon.png" />
-<link rel="apple-touch-startup-image" href="./iOS-startup.png" />
 <title>Curiosity Clock</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link rel="shortcut icon" href="index.ico">
+
+<link rel="apple-touch-icon" href="iOS-icon.png" />
+
+<link rel="apple-touch-startup-image" href="launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+
+<style>
+
+html, body, #wrapper {
+   height:100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   border: 0;
+}
+#wrapper td {
+   vertical-align: middle;
+}
+
+</style>
 
 <script type="text/javascript">
 function updateClock (){
@@ -362,6 +388,7 @@ function updateClock (){
 </head>
 
 <body style="background-color:dimgray;" onload="updateClock(); setInterval('updateClock()', 1000 )">
+<!--
 <br>
 <br>
 <br>
@@ -369,7 +396,7 @@ function updateClock (){
 <br>
 <center>
 <table>
-<!--
+
   <tr>
     <td>
       <center><img src="JPL.png"></p></center>
@@ -386,7 +413,7 @@ function updateClock (){
       <center><span id="clockUTC" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: darkblue">&nbsp;</span></center>
     </td>
 	</tr>
--->
+
 
   <tr>
     <td>
@@ -398,5 +425,19 @@ function updateClock (){
   </tr>
 </table>
 </center>
+-->
+
+<table id="wrapper">
+    <tr>
+        <td align="right">
+          <img src="Curiosity.png">
+       </td>
+        <td align="center">
+          <span id="clockLMST" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: darkred">&nbsp;</span>
+        </td>
+    </tr>
+</table>
+
+
 </body>
 </html>
