@@ -5,7 +5,7 @@
 
 <title>MVK Clocks</title>
 
-<meta name="viewport" content="width=850, initial-scale=1">
+<meta name="viewport" content="width=850, initial-scale=.25">
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <link rel="shortcut icon" href="index.ico">
@@ -506,6 +506,29 @@ function updateClock (){
     </tr>
 </table>
 
+<footer id="settings"><p align="center" style="color:white; font-family: Arial">
+    <input type="checkbox" id="toggle" onchange="isChecked(this.id)"/> Stay awake?<br><br>
+</p></footer>
+
+<script src="NoSleep.min.js"></script>
+
+<script>
+
+var noSleep = new NoSleep();
+var wakeLockEnabled = false;
+
+function isChecked(id) {
+    var inputCheckbox = document.getElementById(id);
+    if(!inputCheckbox.checked) {
+        noSleep.disable(); // let the screen turn off.
+        wakeLockEnabled = false;
+    } else {
+        noSleep.enable(); // keep the screen on!
+        wakeLockEnabled = true;
+    }
+}
+
+</script>
 
 </body>
 </html>
