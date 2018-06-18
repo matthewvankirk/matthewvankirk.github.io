@@ -1,12 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html manifest="index.manifest">
+
 <head>
 
-<link rel="shortcut icon" href="./index.ico">
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="apple-touch-icon" href="./iOS-icon.png" />
-<link rel="apple-touch-startup-image" href="./iOS-startup.png" />
 <title>MVK Clocks</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link rel="shortcut icon" href="index.ico">
+
+<link rel="apple-touch-icon" href="iOS-icon.png" />
+
+<link rel="apple-touch-startup-image" href="launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+
+<style>
+
+html, body, #wrapper {
+   height:100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   border: 0;
+}
+#wrapper td {
+   vertical-align: middle;
+   text-align: center;
+}
+
+</style>
 
 <script type="text/javascript">
 function updateClock (){
@@ -446,42 +474,38 @@ function updateClock (){
 </head>
 
 <body style="background-color:dimgray;" onload="updateClock(); setInterval('updateClock()', 1000 )">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div style="text-align: center;">
-  <span id="datePhone" style="font-family: Arial; font-weight: Bold; font-size: 375%; color: White">&nbsp;</span>
-  <br>
-  <hr>
-  <br>
-  <span id="timePhone" style="font-family: Arial; font-weight: Bold; font-size: 375%; color: White">&nbsp;</span>
-  <br>
-  <hr>
-  <br>
-  <span id="utcPhone" style="font-family: Arial; font-weight: Bold; font-size: 375%; color: darkblue">&nbsp;</span>
-  <br>
-  <hr>
-  <br>
-  <span id="lmstPhone" style="font-family: Arial; font-weight: Bold; font-size: 375%; color: darkred">&nbsp;</span>
 
-  <span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: White">&nbsp;</span>
-  <span id="clockUTC" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: darkblue">&nbsp;</span>
-  <span id="clockLMST" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: darkred">&nbsp;</span>
-<!--
-	<span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: White">&nbsp;</span>
--->
-</div>	
+<table id="wrapper">
+    <tr>
+        <td>
+
+          <div style="text-align: center;">
+            <span id="datePhone" style="font-family: Arial; font-weight: Bold; font-size: 375%; color: White">&nbsp;</span>
+            <br>
+            <hr>
+            <br>
+            <span id="timePhone" style="font-family: Arial; font-weight: Bold; font-size: 375%; color: White">&nbsp;</span>
+            <br>
+            <hr>
+            <br>
+            <span id="utcPhone" style="font-family: Arial; font-weight: Bold; font-size: 375%; color: darkblue">&nbsp;</span>
+            <br>
+            <hr>
+            <br>
+            <span id="lmstPhone" style="font-family: Arial; font-weight: Bold; font-size: 375%; color: darkred">&nbsp;</span>
+
+            <span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: White">&nbsp;</span>
+            <span id="clockUTC" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: darkblue">&nbsp;</span>
+            <span id="clockLMST" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: darkred">&nbsp;</span>
+          <!--
+            <span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 200%; color: White">&nbsp;</span>
+          -->
+          </div>
+
+        </td>
+    </tr>
+</table>
+
+
 </body>
 </html>
