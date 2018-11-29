@@ -294,10 +294,11 @@ function updateClock (){
 				
   var SCLKoffset = landingUNIX - landingSCLK;
   var MarsTimeRatio = 1.02749125;
-				
-  var MSLtime = (new Date().getTime() / 1000) - SCLKoffset;
-  var MSLtimeValue = (new Date().getTime() / 1000) - SCLKoffset;
 
+  var leapSec = 2;
+
+  var MSLtime = (new Date().getTime() / 1000) - SCLKoffset + leapSec;
+  var MSLtimeValue = (new Date().getTime() / 1000) - SCLKoffset + leapSec;
 				
   if (MSLtime < landingSCLK) {
     MSLtime = landingSCLK - MSLtime;
@@ -319,8 +320,13 @@ function updateClock (){
 						
   }
 
+  var surfaceUNIX = 1381317960;
+  var surfaceSCLK = 434589485;
+  var sclkScetRatio = 1.000009438;
 
-  var SCLKvalue = Math.floor(MSLtimeValue - 1658);
+  var SCLKtimeValue = (((new Date().getTime() / 1000) - surfaceUNIX) / sclkScetRatio) + surfaceSCLK + leapSec;
+
+  var SCLKvalue = Math.floor(SCLKtimeValue);
   var SCLKstring = "(SCLK = " + SCLKvalue + ")";
 
   // Compose the string for display
