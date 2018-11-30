@@ -276,9 +276,11 @@ function updateClock (){
 				
   var SCLKoffset = landingUNIX - landingSCLK;
   var MarsTimeRatio = 1.02749125;
-				
-  var MSLtime = (new Date().getTime() / 1000) - SCLKoffset;
-				
+
+  var leapSec = 2;
+
+  var MSLtime = (new Date().getTime() / 1000) - SCLKoffset + leapSec;
+					
   if (MSLtime < landingSCLK) {
     MSLtime = landingSCLK - MSLtime;
     var days = Math.floor(MSLtime/(24*60*60));
