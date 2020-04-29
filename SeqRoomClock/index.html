@@ -2,11 +2,52 @@
 <html>
 <head>
 
-<link rel="shortcut icon" href="./index.ico">
+<link rel="shortcut icon" href="https://mslreports.jpl.nasa.gov/surface/data/surface/143/0/index.ico">
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<link rel="apple-touch-icon" href="./iOS-icon.png" />
-<link rel="apple-touch-startup-image" href="./iOS-startup.png" />
+<link rel="apple-touch-icon" href="https://mslreports.jpl.nasa.gov/surface/data/surface/143/0/iOS-icon.png" />
+<link rel="apple-touch-startup-image" href="https://mslreports.jpl.nasa.gov/surface/data/surface/143/0/iOS-startup.png" />
 <title>Seq Room Clock</title>
+
+<style type="text/css">
+.resizable-text-left {
+   font-family:Arial;
+   padding:10px;
+   font-size:60px;
+   vertical-align:top;
+   margin:1px;
+   width:45%;
+   background-color:#EEE;
+   border-width: 1px 0 1px 1px;
+   border-style: solid;
+   border-color: #666;
+ }
+
+.resizable-text-right {
+   font-family:Arial;
+   padding:10px;
+   font-size:60px;
+   margin:1px;
+   width:45%;
+   border-width: 1px 1px 1px 0;
+   border-style: solid;
+   border-color: #666;
+ }
+
+.resizable-text-sol {
+   font-family:Arial;
+   padding:10px;
+   font-size:85px;
+   margin:1px;
+   width:45%;
+   border-width: 1px 1px 1px 0;
+   border-style: solid;
+   border-color: #666;
+ }
+
+   table, td{
+     border-collapse:collapse;
+   }
+</style>
 
 <script type="text/javascript">
 function updateClock (){
@@ -181,10 +222,10 @@ function updateClock (){
   var currentUTCDOY = Math.floor((currentUNIXtime - Date.UTC(currentUTCYear,0,0))/(24*60*60*1000));
 
   if (currentUTCDOY < 100){
-	if (currentUTCDOY < 10){
-		currentUTCDOY = "0" + currentUTCDOY;	
-	}
-	currentUTCDOY = "0" + currentUTCDOY;
+  if (currentUTCDOY < 10){
+    currentUTCDOY = "0" + currentUTCDOY;  
+  }
+  currentUTCDOY = "0" + currentUTCDOY;
   }
 
   //Get the UTC hours for updating clock
@@ -247,7 +288,7 @@ function updateClock (){
   timezoneOffset = timezoneOffset/60;
 
   if (timezoneOffset == 7){
-    var timeZone = "PDT";	
+    var timeZone = "PDT"; 
   } 
   else if (timezoneOffset == 8){
     var timeZone = "PST";
@@ -256,7 +297,7 @@ function updateClock (){
     var timeZone = "";
   }
 
-  var timezoneOffsetString = "0000";	
+  var timezoneOffsetString = "0000";  
 
   if (timezoneOffset != 0){
     var timezoneOffsetString = "0" + timezoneOffset*100;
@@ -265,44 +306,38 @@ function updateClock (){
   var landingUNIX = 1344230212.090; //2012-219T05:16:52
   var landingSCLK = 397502081.314;
   var beginSol00000SCLK = 397446468.740;
-				
+        
   var SCLKoffset = landingUNIX - landingSCLK;
   var MarsTimeRatio = 1.02749125;
-				
-  var leapSec = 2;
+        
+  var MSLtime = (new Date().getTime() / 1000) - SCLKoffset;
+  var MSLtimeValue = (new Date().getTime() / 1000) - SCLKoffset;
 
-  var MSLtime = (new Date().getTime() / 1000) - SCLKoffset + leapSec;
-  var MSLtimeValue = (new Date().getTime() / 1000) - SCLKoffset + leapSec;
-				
+        
   if (MSLtime < landingSCLK) {
     MSLtime = landingSCLK - MSLtime;
     var days = Math.floor(MSLtime/(24*60*60));
     var hours = Math.floor((MSLtime/(60*60))-(days*24));
     var minutes = Math.floor((MSLtime/(60))-(days*24*60)-(hours*60));
     var seconds = Math.floor(MSLtime-(days*24*60*60)-(hours*60*60)-(minutes*60));
-					
+          
     var MSLoutput = "Landing - " + days + ((days == 1) ? " day " : " days ") + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds;
-							
+              
   } else {
     MSLtime = (MSLtime - beginSol00000SCLK)/MarsTimeRatio;
     var sols = Math.floor(MSLtime/(24*60*60));
     var hours = Math.floor((MSLtime/(60*60))-(sols*24));
     var minutes = Math.floor((MSLtime/(60))-(sols*24*60)-(hours*60));
     var seconds = Math.floor(MSLtime-(sols*24*60*60)-(hours*60*60)-(minutes*60));
-					
+          
     var MSLoutput = "Sol " + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols + " " + ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds + " LMST";
     var MSLsol = "Sol " + ((sols < 10) ? "0000" : ((sols < 100) ? "000" : ((sols < 1000) ? "00" : ((sols < 10000) ? "0" : "" )))) + sols;
     var MSLlmst = ((hours < 10) ? "0" : "") + hours + ((minutes < 10) ? ":0" : ":") + minutes + ((seconds < 10) ? ":0" : ":") + seconds + " LMST";
-						
+            
   }
 
-  var surfaceUNIX = 1381317960;
-  var surfaceSCLK = 434589485;
-  var sclkScetRatio = 1.000009438;
 
-  var SCLKtimeValue = (((new Date().getTime() / 1000) - surfaceUNIX) / sclkScetRatio) + surfaceSCLK + leapSec;
-
-  var SCLKvalue = Math.floor(SCLKtimeValue);
+  var SCLKvalue = Math.floor(MSLtimeValue - 1658);
   var SCLKstring = "(SCLK = " + SCLKvalue + ")";
 
   // Compose the string for display
@@ -374,40 +409,40 @@ function updateClock (){
 
 }
 </script>
-</head>
 
+</head>
 <body style="background-color:white;" onload="updateClock(); setInterval('updateClock()', 1000 )">
+
 <center>
-<table>
-<!--
+<div style="width:1024px;height:600px">
+
+<table style="width:99%;margin:auto;margin-top:10px;">
   <tr>
-    <td>
-      <center><img src="JPL.png"></p></center>
-    </td>
-    <td>
-      <center><span id="clock" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: White">&nbsp;</span></center>
-    </td>
+    <td class="resizable-text-left">Now Planning:</td>
+    <td class="resizable-text-sol"><span id="planning"></span></td>
   </tr>
   <tr>
-    <td>
-      <center><img src="Earth.png"></center>
-    </td>
-    <td>
-      <center><span id="clockUTC" style="font-family: Arial; font-weight: Bold; font-size: 300%; color: darkblue">&nbsp;</span></center>
-    </td>
-	</tr>
--->
-
+    <td class="resizable-text-left">Current Event:</td>
+    <td class="resizable-text-right"><span id="current-meeting"></span><br /><span id="countdown-clock-current"></span></td>
+  </tr>
   <tr>
-  	<iframe src="https://mslreports.jpl.nasa.gov/surface/tactical/big_display/index.php" height="600" width="1024" style="border:none; background-color:white;"></iframe>
+    <td class="resizable-text-left">Next Event:</td>
+    <td class="resizable-text-right"><span id="next-meeting"></span></td>
+  </tr>
+  <tr>
+    <td class="resizable-text-left">Time To Next Event:</td>
+    <td class="resizable-text-right"><span id="countdown-clock"></span></td>
   </tr>
 </table>
+
+</div>
 </center>
+
 <center>
 <table>
   <tr style="background-color:white">
     <td>
-      <img src="Curiosity.png">
+      <img src="./Curiosity.png">
     </td>
     <td>
       <span id="clockLMST" style="font-family: Arial; font-weight: Bold; font-size: 350%; color: darkred">&nbsp;</span>
@@ -415,5 +450,44 @@ function updateClock (){
   </tr>
 </table>
 </center>
+
+<script type="text/template" id="planning-template">
+   <span style="color: red;"><%= sol %></span>
+</script>
+
+<script type="text/template" id="current-meeting-template">
+   <span><%= name %></span>
+</script>
+
+<script type="text/template" id="next-meeting-template">
+   <span><%= name %><br />(<%= start %>)</span>
+</script>
+
+<script type="text/template" id="countdown-template">
+   <span><%= timeRemainingString %></span>
+</script>
+
+<script type="text/template" id="countdown-current-template">
+     <span>(ends in <%= timeRemainingString %>)</span>
+</script>
+
+
+<script src="https://mslreports.jpl.nasa.gov/surface/js/jquery.js"></script>
+<script src="https://mslreports.jpl.nasa.gov/surface/js/underscore.js"></script>
+<script src="https://mslreports.jpl.nasa.gov/surface/js/moment.min.js"></script>
+<script src="https://mslreports.jpl.nasa.gov/surface/js/moment-timezone-with-data.min.js"></script>
+<script src="https://mslreports.jpl.nasa.gov/surface/js/backbone.js"></script>
+<script src="https://mslreports.jpl.nasa.gov/surface/tactical/big_display/js/models/meetings.js"></script>
+<script src="https://mslreports.jpl.nasa.gov/surface/tactical/big_display/js/views/meetings.js"></script>
+
+<script src="https://mslreports.jpl.nasa.gov/surface/tactical/big_display/js/fittext/jquery.fittext.js"></script>
+<script src="https://mslreports.jpl.nasa.gov/surface/data/surface/143/0/app.js"></script>
+
+<script>
+  $(".resizable-text-right").fitText(1.0);
+  $(".resizable-text-left").fitText(1.0);
+  $(".resizable-text-sol").fitText(0.6);
+  BD.start();
+</script>
 </body>
 </html>
