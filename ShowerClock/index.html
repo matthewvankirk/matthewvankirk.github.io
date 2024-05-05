@@ -15,6 +15,7 @@
 
 <style>
 body {font-family: 'Trebuchet MS', sans-serif; background-color: Black;}
+
 a:link {
   color: black;
   background-color: transparent;
@@ -25,6 +26,43 @@ a:visited {
   background-color: transparent;
   text-decoration: none;
 }
+
+.collapsible {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 1px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: black;
+}
+
+.collapsible:after {
+  content: '\002B';
+  color: white;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.content {
+  padding: 0 1px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -235,10 +273,30 @@ function updateClock (){
 </div>
 <br>
 <br>
-<br>
-<br>
 
 <iframe src="./weather_widget.html" title="Weather Widget" width="100%" style="border:none;" scrolling="no"></iframe>
+
+<button class="collapsible"></button>
+<div class="content">
+<iframe src="https://tunein.com/embed/player/s34635/" style="width:100%; height:100px;" scrolling="no" frameborder="no"></iframe>
+</div>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+</script>
 
 </body>
 </html>
