@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html manifest="index.manifest">
+
+<head>
+
+<title>Which way?</title>
+
+<meta http-equiv="refresh" content="600" name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<link rel="stylesheet" href="w3.css">
+<link rel="shortcut icon" href="index.ico">
+
+<link rel="apple-touch-icon" href="iOS-icon-57x57.png" sizes="57x57">
+<link rel="apple-touch-icon" href="iOS-icon-72x72.png" sizes="72x72">
+<link rel="apple-touch-icon" href="iOS-icon-114x114.png" sizes="114x114">
+<link rel="apple-touch-icon" href="iOS-icon-144x144.png" sizes="144x144">
+
+<link rel="apple-touch-startup-image" href="launch-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-750x1294.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1242x2148.png" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1536x2048.png" media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-1668x2224.png" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-2048x2732.png" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)">
+
+</head>
+
+<style>
+.mySlides {display:none;}
+
+html, body, #wrapper {
+   height:100%;
+   width: 100%;
+   margin: 0;
+   padding: 0;
+   border: 0;
+}
+#wrapper td {
+   vertical-align: middle;
+   text-align: center;
+}
+
+</style>
+
+<body style="background-color:black">
+
+
+<h2 class="w3-center" style="color:white">Which way?</h2>
+
+<table id="wrapper">
+    <tr>
+        <td>
+            <div class="w3-content w3-section" style="max-width:75%">
+                <img class="mySlides" src="left.png" style="width:100%">
+                <img class="mySlides" src="right.png" style="width:100%">
+            </div>	
+        </td>
+    </tr>
+</table>
+
+<script>
+var loop = 1;
+
+while (loop < 10) {
+  var min = Math.ceil(1);
+  var max = Math.floor(2);
+  var myIndex = Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+
+  //display();
+
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none"; 
+    }
+    x[myIndex-1].style.display = "block";
+
+  alert (myIndex);
+  loop++;
+}
+
+function display() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none"; 
+    }
+    x[myIndex-1].style.display = "block";
+}
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+</script>
+
+<script src="NoSleep.min.js"></script>
+
+<footer><p align="center" style="color:white"><input type="checkbox" id="toggle" onchange="isChecked(this.id)"/> Stay awake?</p></footer>
+
+<script>
+var noSleep = new NoSleep();
+var wakeLockEnabled = false;
+
+function isChecked(id) {
+    var inputCheckbox = document.getElementById(id);
+    if(!inputCheckbox.checked) {
+        noSleep.disable(); // let the screen turn off.
+        wakeLockEnabled = false;
+    } else {
+        noSleep.enable(); // keep the screen on!
+        wakeLockEnabled = true;
+    }
+}
+
+</script>
+
+</body>
+</html>
