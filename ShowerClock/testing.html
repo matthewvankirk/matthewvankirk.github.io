@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!--<meta http-equiv="refresh" content="5">-->
+<title>Weather Widget</title>
+
+<style>
+body {font-family: 'Trebuchet MS', sans-serif; background-color: Black;}
+a:link {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<hr>
+<a class="weatherwidget-io" href="https://forecast7.com/en/34d20n118d24/91208/?unit=us" data-label_1="GLENDALE" data-label_2="CURRENT" data-font="Trebuchet MS" data-icons="Climacons Animated" data-days="3" data-theme="dark" >-</a>
+<hr>
+<div style="float:left;">
+    <span style="display:inline; color: white; font-family: 'Trebuchet MS', sans-serif; font-size: 75%;">Last updated:</span>
+    <span id="datetime" style="display:inline; color:white; font-family: 'Trebuchet MS', sans-serif; font-size: 75%;"></span>
+    <span id="online_status" style="display:inline; color:white; font-family: 'Trebuchet MS', sans-serif; font-size: 75%;"></span>
+    <span id="github_status" style="display:inline; color:white; font-family: 'Trebuchet MS', sans-serif; font-size: 75%;"></span>
+    <span id="weather_status" style="display:inline; color:white; font-family: 'Trebuchet MS', sans-serif; font-size: 75%;"></span>
+</div>
+
+
+<script>
+
+updateDateTime();
+
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='./widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+
+setInterval(function(){
+  if (navigator.onLine) {
+    document.querySelector('#online_status').textContent = "online";
+    var githubImg = new Image;
+    githubImg.src = "https://matthewvankirk.github.io/ShowerClock/testing.ico";
+    githubImg.onload = function(){
+      //alert(this.width);
+      if (githubImg.height == 64) {
+        document.querySelector('#github_status').textContent = "github";
+        var weatherImg = new Image;
+        weatherImg.src = "https://weatherwidget.io/favicon.ico";
+        weatherImg.onload = function(){
+        //alert(this.width);
+          if (weatherImg.height == 48) {
+            document.querySelector('#weather_status').textContent = "weather";
+            //window.location.reload();
+
+          } 
+        }
+      } 
+    }
+  } 
+}, 2000);
+
+
+// create a function to update the date and time
+function updateDateTime() {
+  // create a new `Date` object
+  const now = new Date();
+
+  // get the current date and time as a string
+  const currentDateTime = now.toLocaleString();
+  var timePieces = currentDateTime.split(" ");
+  var currentTime = (timePieces[1]);
+  var currentAmPm = (timePieces[2]);
+
+  const currentMonth = now.toLocaleString("default", { month: "2-digit" });
+  const currentDate = now.toLocaleString("default", { day: "2-digit" });
+  const currentYear = now.toLocaleString("default", { year: "numeric" });
+
+  var currentDateString = [currentMonth, currentDate, currentYear].join("/");
+  var currrentTimeString = [currentTime, currentAmPm].join(" ");
+  var currrentDateTimeString = [currentDateString, currrentTimeString].join(" ");
+
+  // update the `textContent` property of the `span` element with the `id` of `datetime`
+  document.querySelector('#datetime').textContent = currrentDateTimeString;
+}
+
+</script>
+
+</body>
+</html>
