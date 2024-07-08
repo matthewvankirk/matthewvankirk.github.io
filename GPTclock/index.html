@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Auto Reload Page with Clock and Weather</title>
+    <style>
+        body {
+            background-color: black;
+            color: tan;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #date, #clock, #weather {
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        // Function to update the clock and date
+        function updateClock() {
+            const now = new Date();
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+            const dayOfWeek = dayNames[now.getDay()];
+            const month = monthNames[now.getMonth()];
+            const day = String(now.getDate()).padStart(2, '0');
+            const year = now.getFullYear();
+            
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            const shortDate = `${String(now.getMonth() + 1).padStart(2, '0')}/${day}/${year}`;
+
+            const fullDate = `${dayOfWeek}, ${month} ${day}, ${year} (${shortDate})`;
+            const formattedTime = `${hours}:${minutes}:${seconds} ${ampm}`;
+            
+            document.getElementById('date').textContent = `Current Date: ${fullDate}`;
+            document.getElementById('clock').textContent = `Current Time: ${formattedTime}`;
+        }
+
+        // Function to fetch weather data
+        async function fetchWeather() {
+            const apiKey = 'YOUR_API_KEY'; // Replace with your OpenWeatherMap API key
+            const city = 'New York'; // Replace with your city
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Weather data could not be fetched');
+                }
+                const weatherData = await response.json();
+                const temperature = weatherData.main.temp;
+                const description = weatherData.weather[0].description;
+                document.getElementById('weather').textContent = `Current Weather in ${city}: ${temperature}°C, ${description}`;
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                document.getElementById('weather').textContent = 'Unable to fetch weather data';
+            }
+        }
+
+        // Function to check internet connection and reload if connected
+        function checkInternetConnection() {
+            fetch('https://www.google.com', { method: 'HEAD', mode: 'no-cors' })
+                .then(() => {
+                    console.log('Internet is accessible');
+                    setTimeout(() => {
+                        location.reload();
+                    }, 600000); // 600000 milliseconds = 10 minutes
+                })
+                .catch(() => {
+                    console.log('No internet connection');
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateClock();
+            fetchWeather();
+            checkInternetConnection();
+            setInterval(updateClock, 1000); // Update clock every second
+            setInterval(fetchWeather, 600000); // Update weather every 10 minutes
+            setInterval(checkInternetConnection, 600000); // Check connection every 10 minutes
+        });
+    </script>
+</head>
+<body>
+    <h1>Welcome to the Conditional Auto Reloading Page with Clock and Weather</h1>
+    <div id="date">Loading current date...</div>
+    <div id="clock">Loading current time...</div>
+    <div id="weather">Loading current weather...</div>
+    <p>This page will automatically reload every ten minutes if the internet is accessible.</p>
+</body>
+</html>

@@ -63,47 +63,6 @@ a:visited {
   background-color: black;
 }
 
-#left
-{
- width:78%;
- float:left;   
-}
-
-#right
-{
- width:22%;
- float:right;   
-}
-
-.parent {
-  border: 1px solid blue;
-  text-align: center;
-}
-.child1 {
-  display: inline-block;
-  border: 1px solid red;
-  vertical-align: middle;
-  text-align: center;
-}
-.child2 {
-  display: inline-block;
-  border: 1px solid red;
-  vertical-align: bottom;
-  text-align: right;
-}
-
-.float-parent-element { 
-    width: 80%; 
-} 
-.float-child-element { 
-    float: left; 
-    width: 50%; 
-} 
-
-td {
-  vertical-align: bottom;
-}
-
 </style>
 
 <script type="text/javascript">
@@ -305,52 +264,19 @@ function updateClock (){
 <br><br><br><br><br>
 <br><br>
 <div style="text-align: center;">
-  <span id="dateTest" style="font-weight: Bold; font-size: 250%; color: Tan">Wednesday, September 25, 2024 (09/25/2024)</span>
+  <span id="date" style="font-weight: Bold; font-size: 250%; color: Tan"></span>
 </div>
 
 <div style="text-align: center;">
-  <span id="clockLocalTest" style="font-weight: Bold; font-size: 1200%; color: Tan;">12:22:22</span>
-</div>
-
-
-<div class='parent'>
-  <div class='child1'><span id="clockLocalTest" style="font-weight: Bold; font-size: 1200%; color: Tan;">12:22:22</span></div>
-  <div class='child2'><span id="timeOfDayLocalTest" style="font-weight: Bold; font-size: 300%; color: Tan">PM</span></div>
-</div>
-
-
-
-<table> 
-   <tr> 
-      <td></td>
-      <td><div1><span id="clockLocalTest" style="font-weight: Bold; font-size: 1200%; color: Tan;">12:22:22</span></div></td> 
-      <td><div2><span id="timeOfDayLocalTest" style="font-weight: Bold; font-size: 300%; color: Tan">PM</span></div></td> 
-   </tr> 
-</table> 
-
-
-
-<div id="left"></div>
-    <div id="right"><span id="timeOfDayLocalTest" style="font-weight: Bold; font-size: 300%; color: Tan">PM</span></div>
-
-
-<div style="text-align: left;">
-  <span id="1Test" style="font-weight: Bold; font-size: 250%; color: Tan">11111111111111111111</span><br>
-  <span id="2Test" style="font-weight: Bold; font-size: 250%; color: Tan">22222222222222222222</span><br>
-  <span id="3Test" style="font-weight: Bold; font-size: 250%; color: Tan">33333333333333333333</span><br>
-  <span id="4Test" style="font-weight: Bold; font-size: 250%; color: Tan">44444444444444444444</span><br>
-  <span id="5Test" style="font-weight: Bold; font-size: 250%; color: Tan">55555555555555555555</span><br>
-  <span id="6Test" style="font-weight: Bold; font-size: 250%; color: Tan">66666666666666666666</span><br>
-  <span id="7Test" style="font-weight: Bold; font-size: 250%; color: Tan">77777777777777777777</span><br>
-  <span id="8Test" style="font-weight: Bold; font-size: 250%; color: Tan">88888888888888888888</span><br>
-  <span id="9Test" style="font-weight: Bold; font-size: 250%; color: Tan">99999999999999999999</span><br>
-  <span id="0Test" style="font-weight: Bold; font-size: 250%; color: Tan">00000000000000000000</span><br>
+  <span id="clockLocal" style="font-weight: Bold; font-size: 1200%; color: Tan"></span>
+    <span id="timeOfDayLocal" style="font-weight: Bold; font-size: 300%; color: Tan"></span>
 </div>
 <br>
 <br>
+
+<iframe src="./weather_widget.html" title="Weather Widget" width="100%" style="border:none;" scrolling="no"></iframe>
 
 <!--
-<iframe src="./weather_widget.html" title="Weather Widget" width="100%" style="border:none;" scrolling="no"></iframe>
 
 <button class="collapsible"></button>
 <div class="content">
